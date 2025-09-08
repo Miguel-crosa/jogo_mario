@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Super Mario Jump</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="_css/style.css">
+</head>
+
+<body>
+
+    <div class="game-board">
+        <p id="placar"></p>
+
+        <img src="_imagens/logoSenai.png" width="150px" class="logoSenai">
+        <img src="_imagens/clouds.png" class="clouds">
+        <img src="_media/mario.gif" class="mario">
+        <img src="_imagens/pipe.png" class="pipe">
+        <img src="_media/moeda.gif" class="coin">
+        <img src="_media/marioPlacar.gif" class="marioS" width="30px" margin: 0;>
+        <div class="sol"></div>
+
+        <div class="telaInicial" id="startMenu">
+            <h1 class="menu-title">Super Mario Jump</h1>
+
+            <div class="menu-buttons">
+                <button id="iniciar">🎮 Começar o Jogo</button>
+                <button id="personagem">👾 Escolher Personagem</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <audio id="musicaFundo" loop></audio>
+    <audio id="audioPulo"></audio>
+    <audio id="audioPersonagem"></audio>
+
+
+    <script src="_js/main.js" defer></script>
+
+</body>
+
+</html>
