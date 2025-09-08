@@ -11,7 +11,8 @@ body {
 
 .logoSenai {
     position: absolute;
-    top: 5%;
+    top: 84.12%;
+    left: 92%;
     z-index: 999;
 }
 
@@ -24,6 +25,22 @@ body {
     overflow: hidden;
     background: linear-gradient(#87ceeb, #e0f6ff);
     transition: background-color 2s linear;
+}
+
+.texto {
+    position: absolute;
+    left: 95.5%;
+    top: 10%;
+    transform: -50%;
+    z-index: 999;
+    visibility: hidden;
+}
+
+.textoVida {
+    position: absolute;
+    left: 13%;
+    top: 4.5%;
+    visibility: hidden;
 }
 
 .pipe {
