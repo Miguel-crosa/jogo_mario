@@ -111,11 +111,12 @@ function jogo() {
 
     numeroPlacar++;
 
-    if (numeroPlacar >= 500 && sol.style.backgroundColor !== 'white') {
+    if (numeroPlacar >= 100 && sol.style.backgroundColor !== 'white') {
 
         // SISTEMA DE 'DIFICULDADE'
-        pipe.style.animation = 'pipe-animation 1.5s infinite linear';
-        pipe.style.right = '-100px';
+        clearInterval(loop);
+        jogoRodando = false;
+
         sol.style.backgroundColor = 'white';
         sol.style.borderColor = 'black';
         gameBoard.style.background = '#1a1746ff';
@@ -124,6 +125,14 @@ function jogo() {
         cloud.style.width = '75px';
         texto.style.color = 'white';
         textoVida.style.color = 'white';
+
+        pipe.style.animation = 'none';
+        setTimeout(() => {
+            pipe.style.animation = 'pipe-animation 1.5s infinite linear';
+            jogoRodando = true;
+            loop = setInterval(jogo, 50);
+        }, 50);
+
     }
 
     placar.innerHTML = `${numeroPlacar}`;
@@ -144,7 +153,7 @@ function jogo() {
             texto.style.visibility = 'hidden';
         }, 800);
 
-        if (moedasPegas >= 2) {
+        if (moedasPegas >= 10) {
             vidas += 1;
             textoVida.style.visibility = 'visible';
 
@@ -173,10 +182,10 @@ function jogo() {
 
             pipe.style.animation = 'none';
             setTimeout(() => {
-                pipe.style.animation = 'pipe-animation 3s infinite linear';
+                pipe.style.animation = 'pipe-animation 1.5s infinite linear';
                 jogoRodando = true;
                 loop = setInterval(jogo, 50);
-            }, 1000);
+            }, 800);
         } else {
             jogoRodando = false;
             clearInterval(loop);
