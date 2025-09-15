@@ -85,13 +85,19 @@ marioPlacar.style.visibility = 'hidden';
 function jump() {
 
     // FEITO PARA NÃO CONSEGUIR PULAR DURANTE O 'MENU INICIAL'
-    if (!jogoRodando || !mario) return;
+    if (!jogoRodando) return;
 
     mario.classList.add('jump');
 
-    if (audioPulo) {
-        audioPulo.src = segredo >= 5 ? './_media/pou.mp3' : './_media/jump.mp3';
-        audioPulo.volume = segredo >= 5 ? 1 : 0.1;
+    if (segredo >= 5) {
+        //som do pou kkkkkk
+        audioPulo.src = './_media/pou.mp3';
+        audioPulo.volume = 1;
+        audioPulo.play();
+    } else {
+        //som normal do jogo
+        audioPulo.src = './_media/jump.mp3';
+        audioPulo.volume = 0.1;
         audioPulo.play();
     }
 
