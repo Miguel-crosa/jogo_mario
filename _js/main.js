@@ -245,7 +245,6 @@ function iniciar() {
     sol.style.animation = 'sol-animation 30s infinite linear';
 
     pipe.style.right = '300px';
-    mario.src = './_media/mario.gif';
     mario.style.width = '150px';
     cloud.src = './_imagens/clouds.png';
 
