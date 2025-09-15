@@ -112,7 +112,7 @@ function jogo() {
 
     numeroPlacar++;
 
-    if (numeroPlacar >= 100 && sol.style.backgroundColor !== 'white') {
+    if (numeroPlacar >= 500 && sol.style.backgroundColor !== 'white') {
 
         // SISTEMA DE 'DIFICULDADE'
         clearInterval(loop);
