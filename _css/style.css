@@ -143,12 +143,6 @@ body {
     transition: opacity 1s ease;
 }
 
-.telaInicial.fadeOut {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
 .telaInicial button {
     font-family: 'Press Start 2P', cursive;
     background-color: #ffe600;

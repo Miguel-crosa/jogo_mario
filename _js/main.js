@@ -5,6 +5,7 @@ const sol = document.querySelector('.sol');
 const cloud = document.querySelector('.clouds');
 const coin = document.querySelector('.coin');
 const gameBoard = document.querySelector('.game-board');
+const titulo = document.querySelector(".menu-title");
 const marioPlacar = document.querySelector('.marioS');
 const texto = document.querySelector('.texto');
 const textoVida = document.querySelector(".textoVida");
@@ -84,23 +85,17 @@ marioPlacar.style.visibility = 'hidden';
 function jump() {
 
     // FEITO PARA NÃO CONSEGUIR PULAR DURANTE O 'MENU INICIAL'
-    if (!jogoRodando) return;
+    if (!jogoRodando || !mario) return;
 
     mario.classList.add('jump');
 
-    if (segredo >= 5) {
-        audioPulo.src = './_media/pou.mp3';
-        audioPulo.volume = 1;
-        audioPulo.play();
-    } else {
-        audioPulo.src = './_media/jump.mp3';
-        audioPulo.volume = 0.1;
+    if (audioPulo) {
+        audioPulo.src = segredo >= 5 ? './_media/pou.mp3' : './_media/jump.mp3';
+        audioPulo.volume = segredo >= 5 ? 1 : 0.1;
         audioPulo.play();
     }
 
-    setTimeout(() => {
-        mario.classList.remove('jump');
-    }, 500);
+    setTimeout(() => mario.classList.remove('jump'), 500);
 }
 
 function jogo() {
@@ -151,7 +146,7 @@ function jogo() {
         setTimeout(() => {
             loop = setInterval(jogo, 50);
             texto.style.visibility = 'hidden';
-        }, 800);
+        }, 500);
 
         if (moedasPegas >= 10) {
             vidas += 1;
@@ -182,9 +177,20 @@ function jogo() {
 
             pipe.style.animation = 'none';
             setTimeout(() => {
-                pipe.style.animation = 'pipe-animation 1.5s infinite linear';
-                jogoRodando = true;
-                loop = setInterval(jogo, 50);
+
+
+                if (numeroPlacar >= 100) {
+                    pipe.style.animation = 'pipe-animation 1.5s infinite linear';
+                    jogoRodando = true;
+                    loop = setInterval(jogo, 50);
+                }
+
+                else {
+                    pipe.style.animation = 'pipe-animation 3s infinite linear';
+                    jogoRodando = true;
+                    loop = setInterval(jogo, 50);
+                }
+
             }, 800);
         } else {
             jogoRodando = false;
@@ -195,6 +201,7 @@ function jogo() {
             pipe.style.left = `${pipePosition}px`;
             mario.style.animation = 'none';
             mario.style.bottom = `${marioPosition}px`;
+            coin.style.animation = 'none';
 
             mario.src = './_imagens/game-over.png';
             mario.style.width = '75px';
@@ -203,32 +210,50 @@ function jogo() {
             audioFundo.src = '';
 
             setTimeout(() => {
-                alert('Acabou suas vidas');
-                window.location.reload();
+
+                menuInicial.style.visibility = 'visible';
+                vidasDisplay.style.visibility = 'hidden';
+                titulo.innerText = "Você Perdeu."
+                botaoPersonagem.style.visibility = 'hidden';
+                botaoIniciar.innerText = "Reiniciar jogo";
+                botaoIniciar.style.height = '45px';
+                botaoIniciar.style.scale = '1.4';
+                botaoIniciar.addEventListener('click', () => {
+                    window.location.reload();
+                });
+
             }, 1000);
         }
     }
 }
 
 function iniciar() {
-
-    // FUNÇAO PARA INICIAR O JOGO
-    jogoRodando = true;
+    // RESETANDO ESTADO DO JOGO
     vidas = 3;
     numeroPlacar = 0;
+    moedasPegas = 0;
+    segredo = 0;
     atualizarVidas();
     placar.innerHTML = `0`;
     placar.style.visibility = 'visible';
+    marioPlacar.style.visibility = 'visible';
+    vidasDisplay.style.visibility = 'visible';
 
-    pipe.style.right = '300px';
     pipe.style.animation = 'pipe-animation 3s infinite linear';
     coin.style.animation = 'coin-animation 5s infinite linear';
-    mario.style.width = '150px';
     cloud.style.animation = 'clouds-animation 20s infinite linear';
     sol.style.animation = 'sol-animation 30s infinite linear';
-    marioPlacar.style.visibility = 'visible';
 
+    pipe.style.right = '300px';
+    mario.src = './_media/mario.gif';
+    mario.style.width = '150px';
+    cloud.src = './_imagens/clouds.png';
+
+    // REATIVA O EVENTO DE PULO
+    document.removeEventListener('keydown', jump);
     document.addEventListener('keydown', jump);
+
+    jogoRodando = true;
     loop = setInterval(jogo, 50);
 }
 
@@ -237,7 +262,7 @@ botaoIniciar.addEventListener('click', () => {
     audioFundo.volume = 0.5;
     audioFundo.play();
 
-    menuInicial.classList.add('fadeOut');
+    menuInicial.style.visibility = 'hidden';
 
     setTimeout(() => {
         iniciar();
